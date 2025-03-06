@@ -1,0 +1,21 @@
+server:
+  port: 8080
+
+spring:
+  profiles:
+    active: dev
+  application:
+    name: resource-platform
+  elasticsearch:
+    uris: ${es.host}
+    username: ${es.username}
+    password: ${es.password}
+    connection-timeout: 5s
+
+springdoc:
+  api-docs:
+    enabled: true
+    path: /v3/api-docs
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
