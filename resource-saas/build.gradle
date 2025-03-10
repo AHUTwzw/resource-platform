@@ -1,0 +1,4 @@
+dependencies {
+    implementation project(':resource-api')
+    implementation project(':resource-core')
+}

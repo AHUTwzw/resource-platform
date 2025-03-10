@@ -1,0 +1,12 @@
+dependencies {
+    implementation project(':resource-api')
+    implementation project(':resource-application')
+    implementation project(':resource-common')
+    implementation project(':resource-configuration')
+    implementation project(':resource-core')
+    implementation project(':resource-infrastructure')
+    implementation project(':resource-metaspace')
+    implementation project(':resource-monitor')
+    implementation project(':resource-saas')
+    implementation project(':resource-storage')
+}

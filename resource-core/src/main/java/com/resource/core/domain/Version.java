@@ -13,11 +13,11 @@ import java.util.Map;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Accessors(chain = true)
-public class Resource extends ExtMetaInfo {
+public class Version extends DublinCoreResource{
     /**
-     * 资源唯一id
+     * 版本信息Id
      */
-    private String resId;
+    private String versionId;
 
     /**
      * 版本信息
@@ -30,10 +30,7 @@ public class Resource extends ExtMetaInfo {
     private List<String> tags;
 
     /**
-     * 文件校验值（如 MD5）
+     * 文件校验值（如 MD5）非必须
      */
     private String checksum;
-
-    //加密标识
-    private boolean encryption;
 }

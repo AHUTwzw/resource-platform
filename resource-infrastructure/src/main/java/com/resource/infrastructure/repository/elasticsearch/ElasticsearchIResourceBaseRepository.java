@@ -1,6 +1,5 @@
 package com.resource.infrastructure.repository.elasticsearch;
 
-import com.resource.common.ElasticsearchRepository;
 import com.resource.core.domain.Resource;
 import com.resource.core.service.IResourceBaseService;
 import org.springframework.data.elasticsearch.client.elc.ReactiveElasticsearchClient;

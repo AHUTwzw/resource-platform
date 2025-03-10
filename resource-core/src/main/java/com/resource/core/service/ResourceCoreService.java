@@ -17,34 +17,39 @@ public abstract class ResourceCoreService<T extends Resource> implements IResour
     }
 
     @Override
-    public Mono<T> findById(String namespace, String business, String id, String version) {
+    public String getStorage(String namespace, String bucket) {
+        return String.format("t-%s-%s", namespace, bucket);
+    }
+
+    @Override
+    public String getStorageHistory(String namespace, String bucket) {
+        return String.format("t-%s-%s-history", namespace, bucket);
+    }
+
+    @Override
+    public Mono<T> findByUri(String namespace, String business, String uri, String version) {
         if (StringUtils.hasText(version)) {
-            String table = String.format("t-%s-%s-history", namespace, business);
-            return resourceHistoryService.findById(table, id);
+            String table = getStorage(namespace, business);
+            return resourceHistoryService.findById(table, uri);
         } else {
-            String table = String.format("t-%s-%s", namespace, business);
-            return resourceBaseService.findById(table, id);
+            String table = getStorage(namespace, business);
+            return resourceBaseService.findById(table, uri);
         }
     }
 
     @Override
-    public Mono<Boolean> deleteById(String namespace, String business, String id) {
-        String uri = String.format("t-%s-%s", namespace, business);
-        return resourceBaseService.deleteById(uri, id);
-    }
-
-    @Override
-    public Mono<T> findByUri(String namespace, String business, String id) {
-        return null;
+    public Mono<Boolean> deleteByUri(String namespace, String business, String uri) {
+        String table = getStorage(namespace, business);
+        return resourceBaseService.deleteById(table, uri);
     }
 
     @Override
     public Mono<T> save(String namespace, String business, T resource) {
-        String uri = String.format("t-%s-%s", namespace, business);
+        String table = getStorage(namespace, business);
         return resourceBaseService
-                .save(uri, resource)
+                .save(table, resource)
                 .map(res -> {
-                    return resourceHistoryService.save(uri + "-history", resource);
+                    return resourceHistoryService.save(getStorageHistory(namespace, business), resource);
                 })
                 .map(res -> {
                     return resource;
@@ -52,11 +57,11 @@ public abstract class ResourceCoreService<T extends Resource> implements IResour
     }
 
     @Override
-    public Mono<T> updateById(String namespace, String business, String id, T resource) {
-        String uri = String.format("t-%s-%s", namespace, business);
-        return findById(namespace, business, id, null)
-                .map(res -> resourceBaseService.updateById(uri, id, resource))
-                .then(resourceHistoryService.save(uri, resource))
+    public Mono<T> updateByUri(String namespace, String business, String uri, T resource) {
+        String table = getStorage(namespace, business);
+        return findByUri(namespace, business, uri, null)
+                .map(res -> resourceBaseService.updateById(table, uri, resource))
+                .then(resourceHistoryService.save(table, resource))
                 .thenReturn(resource);
     }
 }
