@@ -1,6 +1,6 @@
 dependencies {
-    implementation project(':resource-api')
-    implementation project(':resource-core')
-    implementation project(':resource-common')
-    implementation project(':resource-infrastructure')
+    implementation project(':resource-base:resource-api')
+    implementation project(':resource-metaspace')
+    implementation 'com.aliyun.oss:aliyun-sdk-oss:3.18.1'
+    implementation 'io.minio:minio:8.5.17'
 }

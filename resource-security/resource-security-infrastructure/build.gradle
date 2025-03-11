@@ -1,0 +1,4 @@
+dependencies {
+    api project(':resource-base:resource-infrastructure')
+    api project(':resource-security:resource-security-core')
+}

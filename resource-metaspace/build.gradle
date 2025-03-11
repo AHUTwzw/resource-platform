@@ -1,6 +1,4 @@
 dependencies {
-    implementation project(':resource-api')
-    implementation project(':resource-common')
-    implementation project(':resource-core')
-    implementation project(':resource-infrastructure')
+    implementation project(':resource-base:resource-api')
+    implementation project(':resource-base:resource-infrastructure')
 }

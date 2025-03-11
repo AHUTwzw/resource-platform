@@ -1,0 +1,16 @@
+plugins {
+    id 'java'
+}
+
+subprojects {
+    // 配置所有子模块
+    apply plugin: 'java'
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        implementation project(':resource-base')
+    }
+}

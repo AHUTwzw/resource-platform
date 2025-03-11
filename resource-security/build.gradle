@@ -1,0 +1,5 @@
+dependencies {
+    api project(':resource-base:resource-api')
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+    compileOnly 'org.springframework.boot:spring-boot-configuration-processor'
+}

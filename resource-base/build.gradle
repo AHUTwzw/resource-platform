@@ -1,0 +1,17 @@
+plugins {
+    id 'java'
+    id 'java-library' // 使用 java-library 插件
+}
+
+subprojects {
+    // 配置所有子模块
+    apply plugin: 'java'
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+
+    }
+}

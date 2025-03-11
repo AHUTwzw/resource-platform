@@ -1,0 +1,4 @@
+dependencies {
+    implementation project(':resource-base')
+    implementation project(':resource-security:resource-security-infrastructure')
+}

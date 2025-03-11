@@ -1,5 +1,0 @@
-dependencies {
-    implementation project(':resource-core')
-    implementation project(':resource-common')
-    implementation project(':resource-infrastructure')
-}
