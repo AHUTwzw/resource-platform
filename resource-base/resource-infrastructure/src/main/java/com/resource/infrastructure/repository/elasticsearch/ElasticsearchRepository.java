@@ -9,6 +9,8 @@ import co.elastic.clients.elasticsearch.core.BulkRequest;
 import co.elastic.clients.elasticsearch.core.search.Hit;
 import co.elastic.clients.elasticsearch.core.search.ResponseBody;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.resource.common.constant.ErrorCode;
+import com.resource.common.exception.BaseException;
 import org.springframework.data.elasticsearch.client.elc.ReactiveElasticsearchClient;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -93,7 +95,7 @@ public class ElasticsearchRepository<T> {
                     if (response.found()) {
                         return Mono.just(response.source());
                     } else {
-                        return Mono.error(new RuntimeException("Document not found"));
+                        return Mono.error(new BaseException(ErrorCode.NOT_FOUND));
                     }
                 });
     }

@@ -33,7 +33,12 @@ public abstract class ElasticsearchIResourceBaseRepository<T extends Resource> e
 
     @Override
     public String getStorage() {
-        return String.format("t-resource-%s-%s", getNamespace(), getDomain());
+        return String.format("t-%s-%s-%s", getBusiness(), getNamespace(), getDomain());
+    }
+
+    @Override
+    public String getBusiness() {
+        return "resource";
     }
 
     @Override

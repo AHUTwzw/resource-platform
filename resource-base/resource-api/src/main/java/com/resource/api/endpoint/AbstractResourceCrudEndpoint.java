@@ -24,16 +24,28 @@ public abstract class AbstractResourceCrudEndpoint<T extends Resource, R extends
         this.resourceService = resourceCoreService;
     }
 
-    @GetMapping("/{uri:.+}")
+    @GetMapping("/{id}")
     @Operation(summary = "获取一个资源对象", description = "通过id获取一个资源对象")
-    public Mono<RD<T>> findHistoryById(@PathVariable String uri,
+    public Mono<RD<T>> findById(@PathVariable String id) {
+        return RD.ok(resourceService.findById(id));
+    }
+
+    @GetMapping
+    @Operation(summary = "获取一个资源对象", description = "通过uri获取一个资源对象")
+    public Mono<RD<T>> findByUri(@RequestParam String uri,
                                 @RequestParam(required = false) String version) {
         return RD.ok(resourceService.findByUri(uri, version));
     }
 
-    @DeleteMapping("/{uri:.+}")
-    @Operation(summary = "删除一个资源对象", description = "通过id删除获取一个资源对象")
-    public Mono<RD<Boolean>> deleteById(@PathVariable String uri) {
+    @DeleteMapping("/{id}")
+    @Operation(summary = "删除一个资源对象", description = "通过id删除一个资源对象")
+    public Mono<RD<Boolean>> deleteById(@PathVariable String id) {
+        return RD.ok(resourceService.deleteById(id));
+    }
+
+    @DeleteMapping
+    @Operation(summary = "删除一个资源对象", description = "通过id删除一个资源对象")
+    public Mono<RD<Boolean>> deleteByUri(@RequestParam String uri) {
         return RD.ok(resourceService.deleteByUri(uri));
     }
 
@@ -43,9 +55,15 @@ public abstract class AbstractResourceCrudEndpoint<T extends Resource, R extends
         return RD.ok(resourceService.save(resourceReq));
     }
 
-    @PutMapping("/{uri:.+}")
+    @PutMapping("/{id}")
     @Operation(summary = "更新一个资源对象", description = "通过id更新获取一个资源对象")
-    public Mono<RD<T>> update(@PathVariable String uri, @RequestBody T resourceReq) {
+    public Mono<RD<T>> update(@PathVariable String id, @RequestBody T resourceReq) {
+        return RD.ok(resourceService.updateById(id, resourceReq));
+    }
+
+    @PutMapping
+    @Operation(summary = "更新一个资源对象", description = "通过id更新获取一个资源对象")
+    public Mono<RD<T>> updateByUri(@PathVariable String uri, @RequestBody T resourceReq) {
         return RD.ok(resourceService.updateByUri(uri, resourceReq));
     }
 }

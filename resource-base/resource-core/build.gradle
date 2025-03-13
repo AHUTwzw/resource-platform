@@ -1,5 +1,5 @@
 dependencies {
     api project(':resource-base:resource-common')
     api project(':resource-base:resource-configuration')
-    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+    api 'org.springframework.boot:spring-boot-starter-webflux'
 }

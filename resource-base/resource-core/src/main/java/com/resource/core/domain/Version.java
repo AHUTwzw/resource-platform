@@ -27,10 +27,10 @@ public class Version extends DublinCoreResource{
     /**
      * 标签信息
      */
-    private List<String> tags;
+    private String tag;
 
     /**
-     * 文件校验值（如 MD5）非必须
+     * 标签信息
      */
-    private String checksum;
+    private List<String> tags;
 }

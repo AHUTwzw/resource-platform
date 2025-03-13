@@ -1,5 +1,6 @@
 package com.resource.common.vo;
 
+import com.resource.common.exception.BaseException;
 import lombok.Data;
 import reactor.core.publisher.Mono;
 
@@ -28,7 +29,7 @@ public class RD<T> {
         return mono
                 .map(data -> new RD<>(code, message, data))
                 .switchIfEmpty(Mono.just(new RD<>(code, message, null)))
-                .onErrorResume(e -> Mono.just(new RD<>(500, "Internal Server Error: " + e.getMessage(), null)));
+                .onErrorResume(Mono::error);
     }
 
     /**
@@ -49,6 +50,16 @@ public class RD<T> {
      */
     public static <T> Mono<RD<T>> err(Throwable e) {
         return Mono.just(new RD<>(500, "Internal Server Error: " + e.getMessage(), null));
+    }
+
+    /**
+     * 默认错误返回的包装方法
+     *
+     * @param e 异常
+     * @return 包装后的 Mono<ApiResponse<T>>
+     */
+    public static <T> Mono<RD<T>> err(BaseException e) {
+        return Mono.just(new RD<>(e.getErrorCode(), e.getMessage(), null));
     }
 
     @Override

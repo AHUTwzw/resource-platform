@@ -29,6 +29,9 @@ public class Rights {
     // 权限秘钥
     private String secretKey;
 
+    // 临时凭证
+    private String token;
+
     // 权限生效时间
     private String effectiveDate;
 
@@ -38,7 +41,7 @@ public class Rights {
     @SneakyThrows
     public Rights genSecretKey2Rights() {
         if (this.accessKey == null || this.licenseType == null) {
-            throw new BaseException("1001", "error");
+            throw new BaseException(1001, "error");
         }
         String secretKey;
         switch (this.licenseType) {
@@ -46,7 +49,7 @@ public class Rights {
                 this.secretKey = AESUtil.generateKey();
                 break;
             default:
-                throw new BaseException("1001", "error");
+                throw new BaseException(1001, "error");
         }
         return this;
     }

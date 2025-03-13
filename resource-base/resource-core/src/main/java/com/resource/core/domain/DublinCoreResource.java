@@ -48,8 +48,7 @@ public class DublinCoreResource extends Document {
     /**
      * 日期
      * 资源生存周期中的一些事件的相关时间
-     * Created
-     * Updated等
+     * 非Created、Updated等
      */
     private Map<String, Date> date;
     /**
@@ -61,12 +60,17 @@ public class DublinCoreResource extends Document {
      * 格式
      * 资源的物理或数字表现，可包括媒体类型或资源容量，可用于限定资源显示或操作所需要的软件、硬件或其他设备，容量表示数据所占的空间大小等。
      */
-    private String format;
+    private Format format;
+    /**
+     * 标识符
+     * 资源的唯一标识，如URI（统一资源标识符）、URL（统一资源定位符）、DoI（数字对象标识符）、ISBN（国际标准书号）、ISSN（国际标准刊号）等。
+     */
+    private String identifier;
     /**
      * 标识符(全路径)
      * 资源的唯一标识，如URI（统一资源标识符）、URL（统一资源定位符）、DoI（数字对象标识符）、ISBN（国际标准书号）、ISSN（国际标准刊号）等。
      */
-    private String identifier;
+    private Map<String, String> identifiers;
     /**
      * 语种
      * 描述资源知识内容的语种

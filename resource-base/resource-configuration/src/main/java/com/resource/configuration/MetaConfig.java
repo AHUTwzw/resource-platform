@@ -16,6 +16,16 @@ public class MetaConfig {
      * 业务号：领域层
      */
     private String business;
+    /**
+     * 业务号：appKey
+     */
     private String appKey;
+    /**
+     * 业务号：密钥
+     */
     private String appSecret;
+    /**
+     * 业务号：状态码前缀
+     */
+    private int errorCode;
 }

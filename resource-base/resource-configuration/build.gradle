@@ -1,3 +1,3 @@
 dependencies {
-    implementation project(':resource-base')
+    api project(':resource-base:resource-common')
 }

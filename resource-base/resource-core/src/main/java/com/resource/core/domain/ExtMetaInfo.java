@@ -16,11 +16,6 @@ import java.util.Map;
 public class ExtMetaInfo extends Version {
 
     /**
-     * 标签信息
-     */
-    private List<String> tags;
-
-    /**
      * 额外信息
      */
     private Map<String, String> additional;

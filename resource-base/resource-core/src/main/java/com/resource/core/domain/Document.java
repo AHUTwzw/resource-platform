@@ -1,8 +1,9 @@
 package com.resource.core.domain;
 
-import com.resource.common.annotation.Domain;
 import lombok.Data;
 import lombok.experimental.Accessors;
+
+import java.util.Date;
 
 @Data
 @Accessors(chain = true)
@@ -13,10 +14,12 @@ public class Document implements Value {
      * 逻辑主键,不建议用作业务处理
      */
     private String id;
-
-    @Override
-    public String getDomain() {
-        Domain domain = this.getClass().getAnnotation(Domain.class);
-        return domain.value();
-    }
+    /**
+     * 创建时间
+     */
+    private Date creatTime;
+    /**
+     * 更新时间
+     */
+    private Date updateTime;
 }

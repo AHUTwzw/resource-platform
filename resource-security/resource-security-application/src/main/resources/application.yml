@@ -25,3 +25,4 @@ springdoc:
 meta:
   service:
     namespace: security
+    error-code: 10000

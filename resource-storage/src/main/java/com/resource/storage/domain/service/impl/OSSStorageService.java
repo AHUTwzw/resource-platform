@@ -16,6 +16,7 @@ import reactor.core.publisher.Mono;
 
 import java.net.URL;
 import java.util.Date;
+import java.util.UUID;
 
 public class OSSStorageService implements IStorageService {
     private final String endpoint;
@@ -45,18 +46,19 @@ public class OSSStorageService implements IStorageService {
             OSSMetadata ossMetadata = new OSSMetadata(bucketName, objectKey, endpoint);
 
             // Build UploadInfo
-            return new UploadInfo(stsInfo, uploadUrl, ossMetadata);
+            return new UploadInfo(objectKey, stsInfo, uploadUrl, ossMetadata);
         });
     }
 
     private STSInfo generateSTSToken(int expirationMinutes) {
         try {
-            IClientProfile config = DefaultProfile.getProfile(accessKeyId, accessKeySecret, endpoint);
+            String regionId = endpoint.substring(0, endpoint.indexOf(".")).replace("oss-", "");
+            IClientProfile config = DefaultProfile.getProfile(regionId, accessKeyId, accessKeySecret);
 
             DefaultAcsClient client = new DefaultAcsClient(config);
             AssumeRoleRequest request = new AssumeRoleRequest();
             request.setRoleArn(roleArn);
-            request.setRoleSessionName(roleSessionName);
+            request.setRoleSessionName(roleSessionName == null ? UUID.randomUUID().toString() : roleSessionName);
             request.setDurationSeconds(expirationMinutes * 60L);
 
             AssumeRoleResponse response = client.getAcsResponse(request);

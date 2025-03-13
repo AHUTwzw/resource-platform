@@ -1,6 +1,5 @@
 package com.resource.metaspace.domain.service.impl;
 
-import com.resource.configuration.MetaConfig;
 import com.resource.core.service.IResourceBaseService;
 import com.resource.core.service.IResourceHistoryService;
 import com.resource.core.service.ResourceCoreService;
@@ -11,8 +10,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class NameSpaceService extends ResourceCoreService<NameSpace> implements INameSpaceService {
     public NameSpaceService(IResourceBaseService<NameSpace> resourceBaseService,
-                            IResourceHistoryService<NameSpace> resourceHistoryService,
-                            MetaConfig metaConfig) {
-        super(resourceBaseService, resourceHistoryService, metaConfig);
+                            IResourceHistoryService<NameSpace> resourceHistoryService) {
+        super(resourceBaseService, resourceHistoryService);
     }
 }

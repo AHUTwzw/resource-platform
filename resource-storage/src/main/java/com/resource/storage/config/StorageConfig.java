@@ -12,12 +12,12 @@ public class StorageConfig {
 
     @Bean
     @Primary
-    public IStorageService ossStorageService() {
-        return new OSSStorageService("", "","your-oss-endpoint", "your-access-key-id", "your-access-key-secret");
+    public IStorageService ossStorageService(OSSConfig ossConfig) {
+        return new OSSStorageService(ossConfig.getEndpoint(), ossConfig.getAccessKeyId(),ossConfig.getAccessKeySecret(), ossConfig.getRoleArn(), ossConfig.getRoleSessionName());
     }
 
     @Bean
-    public IStorageService minIOStorageService() {
-        return new MinIOStorageService("your-minio-endpoint", "your-access-key", "your-secret-key");
+    public IStorageService minIOStorageService(OSSConfig ossConfig) {
+        return new MinIOStorageService(ossConfig.getEndpoint(), ossConfig.getAccessKeyId(),ossConfig.getAccessKeySecret());
     }
 }

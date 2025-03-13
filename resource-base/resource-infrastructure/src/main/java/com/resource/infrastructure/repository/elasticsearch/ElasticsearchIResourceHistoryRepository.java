@@ -39,7 +39,12 @@ public abstract class ElasticsearchIResourceHistoryRepository<T extends Resource
 
     @Override
     public String getStorage() {
-        return String.format("t-resource-%s-%s-history", getNamespace(), getDomain());
+        return String.format("t-%s-%s-%s-history", getBusiness(), getNamespace(), getDomain());
+    }
+
+    @Override
+    public String getBusiness() {
+        return "resource";
     }
 
     @Override

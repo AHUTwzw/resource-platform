@@ -36,7 +36,7 @@ public class MinIOStorageService implements IStorageService {
             OSSMetadata ossMetadata = new OSSMetadata(bucketName, objectKey, endpoint);
 
             // Build UploadInfo
-            return new UploadInfo(stsInfo, uploadUrl, ossMetadata);
+            return new UploadInfo(objectKey, stsInfo, uploadUrl, ossMetadata);
         });
     }
 

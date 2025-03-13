@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UploadInfo {
+    private String uri;
     private STSInfo sts;
     private String uploadUrl;
     private OSSMetadata ossMetadata;

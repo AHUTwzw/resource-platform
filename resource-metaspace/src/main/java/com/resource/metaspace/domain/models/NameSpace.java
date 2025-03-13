@@ -1,5 +1,6 @@
 package com.resource.metaspace.domain.models;
 
+import com.resource.common.annotation.Domain;
 import com.resource.core.domain.Resource;
 import lombok.Builder;
 import lombok.Data;
@@ -10,5 +11,6 @@ import lombok.experimental.Accessors;
 @Data
 @Builder
 @Accessors(chain = true)
+@Domain("namespace")
 public class NameSpace extends Resource {
 }

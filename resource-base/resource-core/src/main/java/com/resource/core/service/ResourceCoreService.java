@@ -20,12 +20,22 @@ public abstract class ResourceCoreService<T extends Resource> implements IResour
     }
 
     @Override
+    public Mono<T> findById(String id) {
+        return resourceBaseService.findById(id);
+    }
+
+    @Override
     public Mono<T> findByUri(String uri, String version) {
         if (StringUtils.hasText(version)) {
             return resourceHistoryService.findById(uri);
         } else {
             return resourceBaseService.findById(uri);
         }
+    }
+
+    @Override
+    public Mono<Boolean> deleteById(String id) {
+        return resourceBaseService.deleteById(id);
     }
 
     @Override
@@ -43,6 +53,14 @@ public abstract class ResourceCoreService<T extends Resource> implements IResour
                 .map(res -> {
                     return resource;
                 });
+    }
+
+    @Override
+    public Mono<T> updateById(String id, T resource) {
+        return findByUri(id, null)
+                .map(res -> resourceBaseService.updateById(id, resource))
+                .then(resourceHistoryService.save(resource))
+                .thenReturn(resource);
     }
 
     @Override
